@@ -33,18 +33,24 @@ export function Parser() {
                                     {notes.map((note, i) => (
                                         <Fragment key={i}>
                                             <span
-                                                data-pitch={note.pitch}
-                                                data-octave={note.octave}
-                                                data-note={
-                                                    (note.pitch || '') +
-                                                    alterToString(note.alter) +
-                                                    (note.octave || '')
-                                                }
-                                                data-duration={note.duration}
-                                                className={`${styles[note.pitch.toLowerCase()]} ${
-                                                    styles.note
-                                                } ${styles['type' + note.type] || ''}`}
+                                                className={styles.note}
+                                                style={{
+                                                    minWidth: 60 * note.duration,
+                                                }}
                                             >
+                                                <span
+                                                    className={styles.dot}
+                                                    data-pitch={note.pitch.toLowerCase()}
+                                                    style={{
+                                                        width: 50 * note.duration,
+                                                    }}
+                                                >
+                                                    <span className={styles.pitch}>
+                                                        {note.pitch}
+                                                        {alterToString(note.alter)}
+                                                        {note.octave}
+                                                    </span>
+                                                </span>
                                                 {note.lyric}
                                             </span>
                                         </Fragment>

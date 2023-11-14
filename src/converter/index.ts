@@ -2,7 +2,7 @@ type Note = {
     pitch: string;
     alter: string;
     octave: string;
-    duration: string;
+    duration: number;
     lyric?: string;
     type: string;
 };
@@ -15,7 +15,12 @@ function partParser(part: Element) {
     // const key = part.querySelector('key fifths')?.textContent;
     const measureNodes = Array.from(part.querySelectorAll('measure'));
     const measures: Note[][] = [];
+    let divisions = 1;
     for (const measure of measureNodes) {
+        const measureDivisions = text(measure, 'attributes divisions');
+        if (measureDivisions) {
+            divisions = Number(measureDivisions);
+        }
         const notes: Note[] = [];
         for (let i = 0; i < measure.children.length; i++) {
             const child = measure.children[i];
@@ -30,7 +35,7 @@ function partParser(part: Element) {
             const pitch = text(child, 'pitch step')?.toUpperCase();
             const octave = text(child, 'pitch octave');
             const alter = text(child, 'alter');
-            const duration = text(child, 'duration');
+            const duration = Number(text(child, 'duration')) / divisions;
             const type = text(child, 'type');
             const lyric = text(child, 'lyric text') || undefined;
             notes.push({

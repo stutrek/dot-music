@@ -1,8 +1,9 @@
 .measure {
 	display: inline-block;
-	border-left: 1px solid silver;
-	border-right: 1px solid silver;
-	margin-left: -1px;
+	border-left: 2px solid silver;
+	border-right: 2px solid silver;
+	margin-left: -2px;
+	padding: 0 20px;
 	margin-bottom: 50px;
 }
 
@@ -15,81 +16,44 @@
 	text-align: center;
 }
 
-.note.typehalf {
-	min-width: 100px;
-}
 
-.note.typehalf::before {
-	width: 80px;
-}
-
-.note.typequarter {
-	min-width: 50px;
-}
-	
-.note.typeeighth {
-	min-width: 25px;
-}
-.note.typeeighth::before {
-	width: 20px;
-}
-
-.note.type16th {
-	min-width: 20px;
-}
-.note.type16th::before {
-	width: 12px;
-}
-.note.type32nd {
-	min-width: 10px;
-}
-
-.note.type32nd::before {
-	width: 8px;
-}
-
-.note::before {
-	content: ' ';
+.dot {
 	position: absolute;
 	bottom: 30px;
 	left: 50%;
 	transform: translateX(-50%);
 	width: 30px;
-	height: 30px;
-	border-radius: 20px;
-	border: 1px solid black;
-}
-.note::after {
-	content: attr(data-note);
-	position: absolute;
-	bottom: 30px;
-	left: 50%;
-	transform: translateX(-50%);
-	width: 30px;
-	height: 30px;
-	line-height: 30px;
+	height: 50px;
+	border-radius: 25px;
 	text-align: center;
+	color: #eee;
+	background-color: currentColor;
+	border: color-mix(in lab, currentColor, #000 30%) 2px solid;
 }
 
+.pitch {
+	color: black;
+	line-height: 48px;
+}
 
-.note.c::before {
-	background-color: #f43737;
+.dot[data-pitch="c"] {
+	color: #f43737;
 }
-.note.d::before {
-	background-color: #ffaa00;
+.dot[data-pitch="d"] {
+	color: #ffaa00;
 }
-.note.e::before {
-	background-color: #ffea00;
+.dot[data-pitch="e"] {
+	color: #ffea00;
 }
-.note.f::before {
-	background-color: #00c403;
+.dot[data-pitch="f"] {
+	color: #00c403;
 }
-.note.g::before {
-	background-color: #66deff;
+.dot[data-pitch="g"] {
+	color: #66deff;
 }
-.note.a::before {
-	background-color: #3366ff;
+.dot[data-pitch="a"] {
+	color: #3366ff;
 }
-.note.b::before {
+.dot[data-pitch="b"] {
 	background-color: #6666ff;
 }
