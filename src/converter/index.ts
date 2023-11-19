@@ -1,17 +1,25 @@
-type Note = {
+export type Note = {
     pitch: string;
-    alter: string;
-    octave: string;
+    alter: number;
+    octave: number;
     duration: number;
     lyric?: string;
     type: string;
 };
 
-function text(node: Element, selector: string) {
+export type Part = {
+    id: string;
+    name: string;
+    measures: Note[][];
+};
+
+export type Composition = ReturnType<typeof converter>;
+
+function text(node: Element | XMLDocument, selector: string) {
     return node.querySelector(selector)?.textContent || '';
 }
 
-function partParser(part: Element) {
+function getMeasuresFromPart(part: Element) {
     // const key = part.querySelector('key fifths')?.textContent;
     const measureNodes = Array.from(part.querySelectorAll('measure'));
     const measures: Note[][] = [];
@@ -25,16 +33,14 @@ function partParser(part: Element) {
         for (let i = 0; i < measure.children.length; i++) {
             const child = measure.children[i];
             if (child.nodeName === 'backup') {
-                const value = Number(child.textContent || '0');
-                i += value;
-                continue;
+                break;
             }
             if (child.nodeName !== 'note') {
                 continue;
             }
             const pitch = text(child, 'pitch step')?.toUpperCase();
-            const octave = text(child, 'pitch octave');
-            const alter = text(child, 'alter');
+            const octave = Number(text(child, 'pitch octave'));
+            const alter = Number(text(child, 'alter'));
             const duration = Number(text(child, 'duration')) / divisions;
             const type = text(child, 'type');
             const lyric = text(child, 'lyric text') || undefined;
@@ -54,9 +60,29 @@ function partParser(part: Element) {
     return measures;
 }
 
+function getParts(doc: XMLDocument): Part[] {
+    const partElements = Array.from(doc.querySelectorAll('part-list score-part'));
+    console.log(partElements);
+    const parts = partElements.map((partElement) => {
+        const id = partElement.id;
+        const measures = doc.querySelector(`part#${id}`);
+        console.log({ measures });
+        return {
+            id,
+            name: text(partElement, 'part-name'),
+            measures: measures ? getMeasuresFromPart(measures) : [],
+        };
+    });
+    return parts;
+}
+
 export function converter(xmlString: string) {
     const doc = new DOMParser().parseFromString(xmlString, 'text/xml') as XMLDocument;
-    console.log(doc);
-    const parts = Array.from(doc.querySelectorAll('part')).map(partParser);
-    return parts;
+    const title = text(doc, 'work-title') || 'Untitled';
+    const composer = text(doc, 'creator[type="composer"]') || 'Unknown Composer';
+    return {
+        title,
+        composer,
+        parts: getParts(doc),
+    };
 }

@@ -9,10 +9,12 @@
         "lint": "next lint"
     },
     "dependencies": {
+        "@tonaljs/core": "^4.10.0",
         "@xmldom/xmldom": "^0.8.10",
         "next": "14.0.3",
         "react": "^18",
-        "react-dom": "^18"
+        "react-dom": "^18",
+        "tonal": "^5.0.0"
     },
     "devDependencies": {
         "@types/node": "^20",
