@@ -10,7 +10,7 @@
     },
     "dependencies": {
         "@tonaljs/core": "^4.10.0",
-        "@xmldom/xmldom": "^0.8.10",
+        "jsdom": "^22.1.0",
         "next": "14.0.3",
         "react": "^18",
         "react-dom": "^18",

@@ -20,7 +20,6 @@ function text(node: Element | XMLDocument, selector: string) {
 }
 
 function getMeasuresFromPart(part: Element) {
-    // const key = part.querySelector('key fifths')?.textContent;
     const measureNodes = Array.from(part.querySelectorAll('measure'));
     const measures: Note[][] = [];
     let divisions = 1;
@@ -51,8 +50,6 @@ function getMeasuresFromPart(part: Element) {
                 duration,
                 type,
                 lyric,
-                //@ts-ignore
-                child,
             });
         }
         measures.push(notes);
@@ -62,11 +59,9 @@ function getMeasuresFromPart(part: Element) {
 
 function getParts(doc: XMLDocument): Part[] {
     const partElements = Array.from(doc.querySelectorAll('part-list score-part'));
-    console.log(partElements);
     const parts = partElements.map((partElement) => {
         const id = partElement.id;
         const measures = doc.querySelector(`part#${id}`);
-        console.log({ measures });
         return {
             id,
             name: text(partElement, 'part-name'),

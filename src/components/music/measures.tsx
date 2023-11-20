@@ -1,6 +1,6 @@
-import { Composition, Note, Part } from '@/converter';
+import { Note, Part } from '@/converter';
 import styles from './music.module.css';
-import { FC, Fragment } from 'react';
+import { FC } from 'react';
 import { Midi } from 'tonal';
 
 function alterToString(alter?: number | null) {
@@ -14,8 +14,6 @@ function alterToString(alter?: number | null) {
 }
 
 const Note: FC<{ note: Note; shift: number }> = ({ note, shift }) => {
-    console.log(note);
-
     if (!note.pitch) {
         // rest
         <span
@@ -65,7 +63,7 @@ const Note: FC<{ note: Note; shift: number }> = ({ note, shift }) => {
     );
 };
 
-export const Music: FC<{ parts: Part[]; shift: number }> = ({ parts, shift }) => {
+export const Measures: FC<{ parts: Part[]; shift: number }> = ({ parts, shift }) => {
     return (
         <div className={styles.notes}>
             {parts.map((part, i) => {
