@@ -1,5 +1,24 @@
 .notes {
 	padding: 50px 0;
+
+	--c-color: var(--key-red);
+	--c-sharp-color: var(--key-black);
+	--d-flat-color: var(--key-black);
+	--d-color: var(--key-orange);
+	--d-sharp-color: var(--key-black);
+	--e-flat-color: var(--key-black);
+	--e-color: var(--key-yellow);
+	--f-color: var(--key-green);
+	--f-sharp-color: var(--key-black);
+	--g-flat-color: var(--key-black);
+	--g-color: var(--key-blue);
+	--g-sharp-color: var(--key-black);
+	--a-flat-color: var(--key-black);
+	--a-color: var(--key-indigo);
+	--a-sharp-color: var(--key-black);
+	--b-flat-color: var(--key-black);
+	--b-color: var(--key-violet);
+	
 }
 
 .measure {
@@ -19,7 +38,6 @@
 	position: relative;
 	text-align: center;
 }
-
 
 .dot {
 	position: absolute;
@@ -41,23 +59,53 @@
 }
 
 .dot[data-pitch="c"] {
-	color: #f43737;
+	color: var(--c-color)
+}
+.dot[data-pitch="c#"] {
+	color: var(--c-sharp-color)
+}
+.dot[data-pitch="db"] {
+	color: var(--d-flat-color)
 }
 .dot[data-pitch="d"] {
-	color: #ffaa00;
+	color: var(--d-color)
+}
+.dot[data-pitch="d#"] {
+	color: var(--d-sharp-color)
+}
+.dot[data-pitch="eb"] {
+	color: var(--e-flat-color)
 }
 .dot[data-pitch="e"] {
-	color: #ffea00;
+	color: var(--e-color)
 }
 .dot[data-pitch="f"] {
-	color: #00c403;
+	color: var(--f-color)
+}
+.dot[data-pitch="f#"] {
+	color: var(--f-sharp-color)
+}
+.dot[data-pitch="gb"] {
+	color: var(--g-flat-color)
 }
 .dot[data-pitch="g"] {
-	color: #66deff;
+	color: var(--g-color)
+}
+.dot[data-pitch="g#"] {
+	color: var(--g-sharp-color)
+}
+.dot[data-pitch="ab"] {
+	color: var(--a-flat-color)
 }
 .dot[data-pitch="a"] {
-	color: #3366ff;
+	color: var(--a-color)
+}
+.dot[data-pitch="a#"] {
+	color: var(--a-sharp-color)
+}
+.dot[data-pitch="bb"] {
+	color: var(--b-flat-color)
 }
 .dot[data-pitch="b"] {
-	background-color: #6666ff;
+	color: var(--b-color)
 }

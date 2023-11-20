@@ -15,11 +15,32 @@ function alterToString(alter?: number | null) {
 
 const Note: FC<{ note: Note; shift: number }> = ({ note, shift }) => {
     console.log(note);
+
+    if (!note.pitch) {
+        // rest
+        <span
+            className={styles.note}
+            style={{
+                minWidth: 60 * note.duration,
+            }}
+        >
+            <span
+                className={styles.dot}
+                style={{
+                    width: 50 * note.duration,
+                }}
+            ></span>
+            {note.lyric}
+        </span>;
+    }
+
     let noteString = note.pitch + alterToString(note.alter) + (note.octave || '');
+    let pitch = note.pitch + alterToString(note.alter);
     if (note.pitch && shift) {
         const midi = Midi.toMidi(noteString);
         if (midi) {
             noteString = Midi.midiToNoteName(midi + shift);
+            pitch = noteString.substring(0, noteString.length - 1);
         }
     }
 
@@ -32,7 +53,7 @@ const Note: FC<{ note: Note; shift: number }> = ({ note, shift }) => {
         >
             <span
                 className={styles.dot}
-                data-pitch={note.pitch.toLowerCase()}
+                data-pitch={pitch.toLowerCase()}
                 style={{
                     width: 50 * note.duration,
                 }}
